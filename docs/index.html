@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Versionsschema</title>
+        <link rel="stylesheet" href="./css/reveal.css">
+        <link rel="stylesheet" href="./css/theme/solarized.css" id="theme">
+        <link rel="stylesheet" href="./css/highlight/zenburn.css">
+        <link rel="stylesheet" href="./css/print/paper.css" type="text/css" media="print">
+          <link rel="stylesheet" href="./_assets/custom.css">
+
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">
+
+# Vorschlag einer geänderten Versionsnummernvergabe
+
+</script></section><section  data-markdown><script type="text/template">
+## Inhalt
+
+1. Kriterien für Versionierung
+2. Untersuchung der MinD-Versionskennzeichnung
+3. Alternativ-Vorschlag
+4. Untersuchung des Vorschlags
+5. Vergleich
+
+</script></section><section ><section data-markdown><script type="text/template">
+## Ziel von Versionsnummern
+
+</script></section><section data-markdown><script type="text/template">
+### Definition einer Ordnung
+* definieren eine Ordnung:
+  * Version `13` kam nach Version `10`
+  * Version `13` kam vor Version `17`
+  * zwischen Version `10` und `17` liegen 6 weitere Versionen
+
+</script></section><section data-markdown><script type="text/template">
+### Umfang der Änderungen
+Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
+* wie umfangreich waren Änderungen zwischen zwei Versionen:
+  * marginale Änderungen zwischen Versionen `1.0` und `1.1`
+  * viele Änderungen zwischen Versionen `1.0` und `1.24`
+  * grundlegende Änderungen zwischen Versionen `1.24` und `2.17`
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung zwischen Versionen für Produktion und Test
+* ist eine Version nur für Tests oder auch Produktion gedacht:
+  * `1.2-alpha1`
+  * `1.2`
+  * `1.3-beta5`
+
+</script></section><section data-markdown><script type="text/template">
+### Auslieferungszeitpunkt
+* für welches CC-Release wurde eine Version ausgeliefert:
+  * `19.2` = 2. Release im Jahr 2019
+  * `19.2` = Release von Februar 2019
+
+</script></section><section data-markdown><script type="text/template">
+### Es gibt also die folgenden Kritieren
+
+* eindeutige Ordnung
+* Umfang der Änderungen zwischen zwei Versionen
+* Version für Produktion oder Test
+* Auslieferungszeitpunkt
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Evaluierung des bestehenden Versionsschemas
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung I
+
+* `01.13.00.01` < `01.13.00.02` ?
+  * Nein <!-- .element: class="fragment" data-fragment-index="1" -->
+    * `01.13.00.01` ist Feature-WAVEX-2583
+    * `01.13.00.02` ist Feature-WAVEX-2326
+    * befinden sich parallel in Entwicklung und haben nichts miteinander zu tun
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung II
+
+* `01.13.00.01` < `01.13.00.08` ?
+  * ja  <!-- .element: class="fragment" data-fragment-index="1" -->
+    * `01.13.00.01` ist Feature-WAVEX-2583 ist Vereinbarungen in 19.1.0
+    * `01.13.00.08` ist Testversion aus 19-1-pilot-01-13-00-10
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung III
+
+* `01.13.00.02` < `01.13.00.08` ?
+  * <!-- .element: class="fragment" data-fragment-index="1" --> nein: [WAVEX-2326](https://jira.eudemonia-solutions.de/browse/WAVEX-2326) befindet sich noch in Entwicklung  
+  *  <!-- .element: class="fragment" data-fragment-index="1" --> es gilt umgekehrt: `01.13.00.08` < `01.13.00.02`
+      * `x.08` enthält nichts aus `x.02`
+      * `x.02` enthält Änderungen aus `x.08`
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang I
+
+* `01.12.10.07` und `01.12.10.08`
+  * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
+  * korrekt: zwei direkt aufeinander folgende Testversionen  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang II
+
+* `01.13.00.02` und `01.13.00.08`
+  * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
+  * inkorrekt: viele Änderungen, `01.13.00.02` = Feature-WAVEX-2326  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang III
+
+* `01.12.10.09` und `01.12.11.00`
+  * Erwartung: viele Änderungen, da minor-Version von 10 auf 11 wechselt
+  * inkorrekt: gar keine Änderung, `01.12.10.09` war die letzte Testversion vor Auslieferung der finalen Version `01.12.11.00` <!-- .element: class="fragment" data-fragment-index="1" -->
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung Release/Test-Version I
+
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00' bzw. '50'</span>
+* `01.12.00.00` <span class="fragment" data-fragment-index="2">- 1. Auslieferung für CC 18-2</span>
+* `01.12.11.00` <span class="fragment" data-fragment-index="3">- 11. Update für CC 18-2 (Auslieferung)</span>
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung Release/Test-Version II
+
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00', 'X0', 'X5'</span>
+* `01.12.10.50` <span class="fragment" data-fragment-index="2">- Hotfix, da Suffix = 50</span>
+* `01.12.10.55` <span class="fragment" data-fragment-index="3">- Patch, da Suffix = 55</span>
+
+</script></section><section data-markdown><script type="text/template">
+### Zeitpunkt einer Auslieferung
+
+* `01.12.10.00`? <span class="fragment" data-fragment-index="1">CC-Release 18-2</span>
+* `01.09.04.00`? <span class="fragment" data-fragment-index="2">BSA-Release 590</span>
+
+</script></section><section data-markdown><script type="text/template">
+### Zusammenfassung
+
+* eindeutige Ordnung <span class="fragment" data-fragment-index="1">**nicht erfüllt**</span>
+  * Sonderfälle wegen Feature-Branches <!-- .element: class="fragment" data-fragment-index="1" -->
+* Änderungsumfang <span class="fragment" data-fragment-index="2">**nicht erfüllt**</span>
+  * durch letzte Version vor einer Auslieferung <!-- .element: class="fragment" data-fragment-index="2" -->
+* Version für Produktion oder Test <span class="fragment" data-fragment-index="3">**teilweise erfüllt**</span>
+  * letzte Ziffer ist doppelt belegt <!-- .element: class="fragment" data-fragment-index="3" -->
+  * Kollisionen bei Hotfixes und Patches <!-- .element: class="fragment" data-fragment-index="3" -->
+* Auslieferungszeitpunkt <span class="fragment" data-fragment-index="4">**nicht erfüllt**</span>
+  * an Versionsnummern nicht ablesbar <!-- .element: class="fragment" data-fragment-index="4" -->
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Alternativ-Vorschlag
+
+</script></section><section data-markdown><script type="text/template">
+### Regeln I
+
+* Unterscheidung zwischen:
+  * Auslieferungen (an BMS oder Rechenzentrum)
+  * regulären/spontanen Builds (bspw. Nightly)
+
+</script></section><section data-markdown><script type="text/template">
+### Regeln II - Auslieferungen
+
+* Schema: `[CC-Release].[Update](-[Suffix])`
+  * Kopplung an das CC-Release, da Auslieferung **immer** zu genau einer CC-Version
+  * Update: laufende Nummer zu einem Release
+  * Suffix: zusätzliche Charakterisierung der Auslieferung
+
+</script></section><section data-markdown><script type="text/template">
+### Regeln II - Auslieferungen
+
+* Suffix: zusätzliche Charakterisierung der Auslieferung
+  * **hf**: hotfix
+    * werden bei Echtsystemen nicht angezeigt (?)
+    * bleiben für Releases in Testsysteme des RZ erhalten
+  * **rc** (release-candidate): Testversion an BMS oder Rechenzentrum
+  * **F[ABCD]-[X]**: die Xte-Testversion des Features ABCD an BMS
+    * alternativ **F[ABCD]-[Featurename]-[X]**
+
+</script></section><section data-markdown><script type="text/template">
+### Regeln III - Builds ohne explizite Version
+
+* können/sollten nicht an einem Issue hinterlegt als Quellversion hinterlegt werden
+* Nutzung von Metadaten als Versionskennzeichnung
+  * statt Tag wird commit-Informationen genutzt
+  * wird aktuell bereits so durchgeführt ([10080](http://tomcat-srv-d8.eudemonia-solutions.de:10080/MinD_banker_wave/wave/version))
+  * Schema des **Nightly**: `[letzter Tag]-[Anzahl Commits seit letztem Tag]-[commit-Hash]-[Branch-Name]`
+  * Schema für **Entwickler-Builds**: `[autor]-[commit-Hash]-[Branch-Name]`
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Untersuchung der Alternative
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung I
+
+* `01.13.00.01` < `01.13.00.02` ?
+  * Neu: `19.1-F2583-1` $\neq$ `19.1-F2326-1`
+  * zwei unterschiedliche Features, keine Gemeinsamkeiten
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung II
+
+* `01.13.00.01` < `01.13.00.08` ?
+  * Neu: 19.1-F2583-1 $\neq$ 19.1.0-rc8
+  * keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2583](https://jira.eudemonia-solutions.de/browse/WAVEX-2583))
+* `01.13.00.02` < `01.13.00.08` ?
+  * Neu: 19.1-F2326-1 $\neq$ 19.1.0-rc8
+  * keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2326](https://jira.eudemonia-solutions.de/browse/WAVEX-2326))
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang I
+
+* `01.12.10.07` und `01.12.10.08`
+  * 18.2.10-rc7 und 18.2.10-rc8
+  * wenige Änderungen, da geringste Versionsnummer erhöht
+  * korrekt: zwei direkt aufeinander folgende Testversionen
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang II
+
+* `01.13.00.02` und `01.13.00.08`
+  * 19.1-F2326-1 und 19.1.0-rc8
+  * wenig Aussagen über Änderungsumfang - keine DB-Änderungen
+
+</script></section><section data-markdown><script type="text/template">
+### Änderungsumfang III
+
+* `01.12.10.09` und `01.12.11.00`
+  * 18.2.11-rc9 und 18.2.11
+  * keine Änderungen
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung Release/Test-Version I
+
+* `01.12.10.09` -> 18.2.11-rc9
+  * Testversion: Suffix $neq$ '00' bzw. '50'
+* `01.12.00.00` -> 18.2.00
+  * Auslieferungsversion: 1. Auslieferung für CC 18-2
+* `01.12.11.00` -> 18.2.11
+  * Auslieferungsversion: 11. Update für CC 18-2
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung Release/Test-Version II
+
+* `01.12.10.50`: 18.2.10-hf5 (Hotfix)
+* `01.12.10.55`: 18.2.10-hf5-patch1 (Patch)
+* Sonderfall: Build auf Integrationszweig
+  * `01.12.11.24` -> direkt auf 18-2
+  * Schema [CC-Release]-[Branch]-[X] (bspw. 19.1-F2326-1) wäre komisch: `18.2-18.2-24`
+  * Einführung eines Namenkürzels `I` = Integration [CC-Release]-I-[X]: `18.2-I-24`
+
+</script></section><section data-markdown><script type="text/template">
+### Zeitpunkt einer Auslieferung
+
+* `01.12.10.00`? CC-Release 18-2
+  * 18.2.10
+* `01.09.04.00`? BSA-Release 5.9.0
+  * 590.4
+
+</script></section><section data-markdown><script type="text/template">
+### Builds ohne Versionsnummernvergabe
+
+* Nightly-Build:
+  * bisher: `01.13.00.15-4-e26ceae10775-Feature-WAVEX-2326`
+  * neu: `19.1.0-rc15-4-e26ceae10775-Feature-WAVEX-2326`
+  * nightly auf einem Integrationszweig: `19.1.0-rc15-4-e26ceae10775-19.1`
+* Builds durch einen Entwickler: `blaschke-d88bbdcbb4f5-WAVEX-3134`
+
+# Wozu das Ganze I
+
+* Technisch haben wir nicht viel gewonnen
+  * aa.bb.cc.dd
+  * erste Teil der Versionsnummer `aa` wird gestrichen
+  * zweite Teil `bb` wird ersetzt durch `CC-Release`
+  * dritte Teil `cc` bleibt wie es ist
+  * vierte Teil `dd` wird ein Suffix
+  * mehr oder weniger ließen sich 90% der Nummern abbilden, also wozu das Ganze?
+
+# Wozu das Ganze II
+
+* Endnutzer: Gemeinsamkeit der Versionsnummer und des CC-Release geben eindeutige Aussage
+* Release-Manager: keine Notwendigkeit der manuellen Pflege der Versionsnummer (es kommt alles aus Tags oder der Repository)
+* QA und Entwickler:
+  * deutlich verbesserte Lesbarkeit der Versionsnummer für auftretende Bugs
+  * vereinfachte Kommunikation, da an Version auch Ursprung des Bugs erkennbar
+
+</script></section></section></div>
+        </div>
+
+        <script src="./lib/js/head.min.js"></script>
+        <script src="./js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: './plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: './plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: './plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: './plugin/zoom-js/zoom.js', async: true },
+              { src: './plugin/notes/notes.js', async: true },
+              { src: './plugin/math/math.js', async: true }
+            ];
+
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default', // none/fade/slide/convex/concave/zoom
+              dependencies: deps
+            };
+
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+
+            var options = {"controls":false,"slideNumber":false,"transition":"slide","backgroundTransition":"fade"};
+            options = extend(defaultOptions, options, queryOptions);
+        </script>
+
+
+        <script>
+          Reveal.initialize(options);
+        </script>
+    </body>
+</html>
