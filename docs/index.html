@@ -109,28 +109,31 @@ Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
 
 * `01.13.00.02` und `01.13.00.08`
   * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
-  * inkorrekt: viele Änderungen, `01.13.00.02` = Feature-WAVEX-2326  <!-- .element: class="fragment" data-fragment-index="1" -->
+  * <!-- .element: class="fragment" data-fragment-index="1" --> inkorrekt: viele Änderungen, `01.13.00.02` = Feature-WAVEX-2326
 
 </script></section><section data-markdown><script type="text/template">
 ### Änderungsumfang III
 
 * `01.12.10.09` und `01.12.11.00`
   * Erwartung: viele Änderungen, da minor-Version von 10 auf 11 wechselt
-  * inkorrekt: gar keine Änderung, `01.12.10.09` war die letzte Testversion vor Auslieferung der finalen Version `01.12.11.00` <!-- .element: class="fragment" data-fragment-index="1" -->
+  * <!-- .element: class="fragment" data-fragment-index="1" --> inkorrekt: gar keine Änderung, `01.12.10.09` war die letzte Testversion vor Auslieferung der finalen Version `01.12.11.00`
 
 </script></section><section data-markdown><script type="text/template">
 ### Unterscheidung Release/Test-Version I
 
-* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00' bzw. '50'</span>
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: letzte Ziffer $\neq$ 0 </span>
 * `01.12.00.00` <span class="fragment" data-fragment-index="2">- 1. Auslieferung für CC 18-2</span>
 * `01.12.11.00` <span class="fragment" data-fragment-index="3">- 11. Update für CC 18-2 (Auslieferung)</span>
 
 </script></section><section data-markdown><script type="text/template">
 ### Unterscheidung Release/Test-Version II
 
-* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00', 'X0', 'X5'</span>
-* `01.12.10.50` <span class="fragment" data-fragment-index="2">- Hotfix, da Suffix = 50</span>
-* `01.12.10.55` <span class="fragment" data-fragment-index="3">- Patch, da Suffix = 55</span>
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: letzte Ziffer $\neq$ '0'</span>
+* `01.12.10.10`
+  * <!-- .element: class="fragment" data-fragment-index="2" --> Hotfix, da Suffix = 10 (letzte Ziffer eine '0')
+  * <!-- .element: class="fragment" data-fragment-index="3" --> Oder ist es doch die 10. Testversionen für `x.11.00`?
+  * <!-- .element: class="fragment" data-fragment-index="4" -->  Kollisionen von Testversionen/Hotfixes durch Doppelbelegung der letzten Ziffern
+
 
 </script></section><section data-markdown><script type="text/template">
 ### Zeitpunkt einer Auslieferung
@@ -159,36 +162,37 @@ Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
 
 * Unterscheidung zwischen:
   * Auslieferungen (an BMS oder Rechenzentrum)
+  * Auslieferungen zu QA-Zwecken (an BMS oder Testinstanzen des RZ)
   * regulären/spontanen Builds (bspw. Nightly)
 
 </script></section><section data-markdown><script type="text/template">
 ### Regeln II - Auslieferungen
 
-* Schema: `[CC-Release].[Update](-[Suffix])`
+* Schema: `[CC-Release].[Update]`
   * Kopplung an das CC-Release, da Auslieferung **immer** zu genau einer CC-Version
   * Update: laufende Nummer zu einem Release
-  * Suffix: zusätzliche Charakterisierung der Auslieferung
+  * Hotfix: sollten wie Update behandelt werden
+  * Sonderfall Patches: werden in Echtsystemen nicht angezeigt
+    * ließe sich "versteckt" (unsichtbar für Endanwender) hinterlegen
 
 </script></section><section data-markdown><script type="text/template">
-### Regeln II - Auslieferungen
-
-* Suffix: zusätzliche Charakterisierung der Auslieferung
-  * **hf**: hotfix
-    * werden bei Echtsystemen nicht angezeigt (?)
-    * bleiben für Releases in Testsysteme des RZ erhalten
-  * **rc** (release-candidate): Testversion an BMS oder Rechenzentrum
-  * **F[ABCD]-[X]**: die Xte-Testversion des Features ABCD an BMS
+### Regeln III - Auslieferungen zwecks QA
+* Schema: `[CC-Release].[Update]-[Suffix]` zusätzliche Charakterisierung über Suffix
+  * **p** - patch: werden in Echtsystemen nicht angezeigt
+  * **rc** - release-candidate: Testversion an BMS oder Rechenzentrum
+  * **F[ABCD]-[X]**: die Xte Testversion des Features ABCD an BMS
     * alternativ **F[ABCD]-[Featurename]-[X]**
+  * **i[X]**: die Xte Testversion eines Integrationszweigs
 
 </script></section><section data-markdown><script type="text/template">
-### Regeln III - Builds ohne explizite Version
+### Regeln IV - Builds ohne explizite Version
 
-* können/sollten nicht an einem Issue hinterlegt als Quellversion hinterlegt werden
+* können nicht an einem Issue hinterlegt werden
 * Nutzung von Metadaten als Versionskennzeichnung
   * statt Tag wird commit-Informationen genutzt
-  * wird aktuell bereits so durchgeführt ([10080](http://tomcat-srv-d8.eudemonia-solutions.de:10080/MinD_banker_wave/wave/version))
   * Schema des **Nightly**: `[letzter Tag]-[Anzahl Commits seit letztem Tag]-[commit-Hash]-[Branch-Name]`
   * Schema für **Entwickler-Builds**: `[autor]-[commit-Hash]-[Branch-Name]`
+* wird aktuell bereits so durchgeführt ([10080](http://tomcat-srv-d8.eudemonia-solutions.de:10080/MinD_banker_wave/wave/version))
 
 </script></section></section><section ><section data-markdown><script type="text/template">
 ## Untersuchung der Alternative
@@ -197,68 +201,81 @@ Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
 ### Eindeutige Ordnung I
 
 * `01.13.00.01` < `01.13.00.02` ?
-  * Neu: `19.1-F2583-1` $\neq$ `19.1-F2326-1`
-  * zwei unterschiedliche Features, keine Gemeinsamkeiten
+  * <!-- .element: class="fragment" data-fragment-index="1" -->  Neu: `19.1-F2583-1` $\neq$ `19.1-F2326-1`
+  * <!-- .element: class="fragment" data-fragment-index="1" -->  zwei unterschiedliche Features, keine Gemeinsamkeiten (außer 19.1)
 
 </script></section><section data-markdown><script type="text/template">
 ### Eindeutige Ordnung II
 
 * `01.13.00.01` < `01.13.00.08` ?
-  * Neu: 19.1-F2583-1 $\neq$ 19.1.0-rc8
-  * keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2583](https://jira.eudemonia-solutions.de/browse/WAVEX-2583))
+  * <!-- .element: class="fragment" data-fragment-index="1" --> Neu: `19.1-F2583-1` $\neq$ `19.1.0-rc8`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2583](https://jira.eudemonia-solutions.de/browse/WAVEX-2583))
+
+</script></section><section data-markdown><script type="text/template">
+### Eindeutige Ordnung III
+
 * `01.13.00.02` < `01.13.00.08` ?
-  * Neu: 19.1-F2326-1 $\neq$ 19.1.0-rc8
-  * keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2326](https://jira.eudemonia-solutions.de/browse/WAVEX-2326))
+  * <!-- .element: class="fragment" data-fragment-index="1" --> Neu: `19.1-F2326-1` $\neq$ `19.1.0-rc8`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> keine Aussage darüber, ob das Feature bereits im Release enthalten ist: nachschauen ([WAVEX-2326](https://jira.eudemonia-solutions.de/browse/WAVEX-2326))
 
 </script></section><section data-markdown><script type="text/template">
 ### Änderungsumfang I
 
 * `01.12.10.07` und `01.12.10.08`
-  * 18.2.10-rc7 und 18.2.10-rc8
-  * wenige Änderungen, da geringste Versionsnummer erhöht
-  * korrekt: zwei direkt aufeinander folgende Testversionen
+  * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
+  * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `18.2.11-rc7` und `18.2.11-rc8`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> korrekt: zwei direkt aufeinander folgende Testversionen
+  * <!-- .element: class="fragment" data-fragment-index="2" --> die richtige Zielversion ist Teil der Versionsnummer (Testversion für 11. - nicht 10. - Update)
 
 </script></section><section data-markdown><script type="text/template">
 ### Änderungsumfang II
 
 * `01.13.00.02` und `01.13.00.08`
-  * 19.1-F2326-1 und 19.1.0-rc8
-  * wenig Aussagen über Änderungsumfang - keine DB-Änderungen
+  * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
+  * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `19.1-F2326-1` und `19.1.0-rc8`
+  * <!-- .element: class="fragment" data-fragment-index="2" --> potentiell viele Änderungen (möglicherweise auch gar keine, weil bereits in 19.1.0 enthalten)
+  * <!-- .element: class="fragment" data-fragment-index="3" --> definitiv keine DB-Schema-Änderungen (neue Tabellen, etc.)
 
 </script></section><section data-markdown><script type="text/template">
 ### Änderungsumfang III
 
 * `01.12.10.09` und `01.12.11.00`
-  * 18.2.11-rc9 und 18.2.11
-  * keine Änderungen
+  * Erwartung: viele Änderungen, da minor-Version von 10 auf 11 wechselt
+  * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `18.2.11-rc9` und `18.2.11`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> potentiell wenig (möglicherweise keine) Änderungen
 
 </script></section><section data-markdown><script type="text/template">
 ### Unterscheidung Release/Test-Version I
 
-* `01.12.10.09` -> 18.2.11-rc9
-  * Testversion: Suffix $neq$ '00' bzw. '50'
-* `01.12.00.00` -> 18.2.00
-  * Auslieferungsversion: 1. Auslieferung für CC 18-2
-* `01.12.11.00` -> 18.2.11
-  * Auslieferungsversion: 11. Update für CC 18-2
+* `01.12.10.09`- Testversion: letzte Ziffer $\neq$ 0
+  * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `18.2.11-rc9`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> korrekte Ziel-Version als Teil dieser Version
+* `01.12.00.00`- 1. Auslieferung für CC 18-2
+  * <!-- .element: class="fragment" data-fragment-index="2" --> neu: `18.2.0`
+* `01.12.11.00`- 11. Update für CC 18-2 (Auslieferung)
+  * <!-- .element: class="fragment" data-fragment-index="3" --> neu: `18.2.11`
 
 </script></section><section data-markdown><script type="text/template">
 ### Unterscheidung Release/Test-Version II
 
-* `01.12.10.50`: 18.2.10-hf5 (Hotfix)
-* `01.12.10.55`: 18.2.10-hf5-patch1 (Patch)
+* `01.12.10.09` - Testversion `18.2.11-rc9`
+* `01.12.10.10` - Hotfix: `18.2.10-hf1`<!-- .element: class="fragment" data-fragment-index="1" -->
+* `???` - Patch: `18.2.10-p1`<!-- .element: class="fragment" data-fragment-index="1" -->
+* für Endanwender könnten wir Anzeige des Suffix streichen, so dass dort nur 18.2.10 angezeigt wird (sinnvoll?)
+
+</script></section><section data-markdown><script type="text/template">
+### Unterscheidung Release/Test-Version III
+
 * Sonderfall: Build auf Integrationszweig
-  * `01.12.11.24` -> direkt auf 18-2
-  * Schema [CC-Release]-[Branch]-[X] (bspw. 19.1-F2326-1) wäre komisch: `18.2-18.2-24`
-  * Einführung eines Namenkürzels `I` = Integration [CC-Release]-I-[X]: `18.2-I-24`
+  * `01.12.11.24` wurde direkt auf 18-2 erstellt
+  * <!-- .element: class="fragment" data-fragment-index="1" --> `18.2-18.2-24` entsprechend Schema `[CC-Release]-[Branch]-[X]` irgendwie komisch
+  * <!-- .element: class="fragment" data-fragment-index="1" --> Nutzung eines Namenkürzels `i` (Integration) `[CC-Release]-i[X]`: `18.2-i24`?
 
 </script></section><section data-markdown><script type="text/template">
 ### Zeitpunkt einer Auslieferung
 
-* `01.12.10.00`? CC-Release 18-2
-  * 18.2.10
-* `01.09.04.00`? BSA-Release 5.9.0
-  * 590.4
+* `01.12.10.00` CC-Release 18-2:`18.2.10`<!-- .element: class="fragment" data-fragment-index="1" -->
+* `01.09.04.00` BSA-Release 5.9.0: `590.4`<!-- .element: class="fragment" data-fragment-index="1" -->
 
 </script></section><section data-markdown><script type="text/template">
 ### Builds ohne Versionsnummernvergabe
@@ -269,6 +286,20 @@ Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
   * nightly auf einem Integrationszweig: `19.1.0-rc15-4-e26ceae10775-19.1`
 * Builds durch einen Entwickler: `blaschke-d88bbdcbb4f5-WAVEX-3134`
 
+</script></section><section data-markdown><script type="text/template">
+### Zusammenfassung
+
+* eindeutige Ordnung <span class="fragment" data-fragment-index="1">**erfüllt**</span>
+  * <!-- .element: class="fragment" data-fragment-index="1" --> `19.1-F2583-1` $\neq$ `19.1.0-rc8`
+  * <!-- .element: class="fragment" data-fragment-index="1" --> `19.1.0-rc8` < `19.1.0`
+* Änderungsumfang <span class="fragment" data-fragment-index="2">**erfüllt**</span>
+  * <!-- .element: class="fragment" data-fragment-index="2" --> `19.1.0-rc8` < `19.1.0`
+* Version für Produktion oder Test <span class="fragment" data-fragment-index="3">**erfüllt**</span>
+  * <!-- .element: class="fragment" data-fragment-index="3" --> `18.2-F253` < `19.1.0-rc8` < `19.1.0` < `19.1.1`
+* Auslieferungszeitpunkt <span class="fragment" data-fragment-index="4">**erfüllt**</span>
+  * <!-- .element: class="fragment" data-fragment-index="4" --> `19.1.0` wurde für CC-Release 19.1 ausgeliefert
+
+</script></section></section><section ><section data-markdown><script type="text/template">
 # Wozu das Ganze I
 
 * Technisch haben wir nicht viel gewonnen
@@ -279,6 +310,7 @@ Je nach Gestaltung sind weitere Informationen in der Versionsnummer eingebettet:
   * vierte Teil `dd` wird ein Suffix
   * mehr oder weniger ließen sich 90% der Nummern abbilden, also wozu das Ganze?
 
+</script></section><section data-markdown><script type="text/template">
 # Wozu das Ganze II
 
 * Endnutzer: Gemeinsamkeit der Versionsnummer und des CC-Release geben eindeutige Aussage
