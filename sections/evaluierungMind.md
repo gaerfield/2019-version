@@ -39,28 +39,31 @@
 
 * `01.13.00.02` und `01.13.00.08`
   * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
-  * inkorrekt: viele Änderungen, `01.13.00.02` = Feature-WAVEX-2326  <!-- .element: class="fragment" data-fragment-index="1" -->
+  * <!-- .element: class="fragment" data-fragment-index="1" --> inkorrekt: viele Änderungen, `01.13.00.02` = Feature-WAVEX-2326
 
 <!--v-->
 ### Änderungsumfang III
 
 * `01.12.10.09` und `01.12.11.00`
   * Erwartung: viele Änderungen, da minor-Version von 10 auf 11 wechselt
-  * inkorrekt: gar keine Änderung, `01.12.10.09` war die letzte Testversion vor Auslieferung der finalen Version `01.12.11.00` <!-- .element: class="fragment" data-fragment-index="1" -->
+  * <!-- .element: class="fragment" data-fragment-index="1" --> inkorrekt: gar keine Änderung, `01.12.10.09` war die letzte Testversion vor Auslieferung der finalen Version `01.12.11.00`
 
 <!--v-->
 ### Unterscheidung Release/Test-Version I
 
-* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00' bzw. '50'</span>
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: letzte Ziffer $\neq$ 0 </span>
 * `01.12.00.00` <span class="fragment" data-fragment-index="2">- 1. Auslieferung für CC 18-2</span>
 * `01.12.11.00` <span class="fragment" data-fragment-index="3">- 11. Update für CC 18-2 (Auslieferung)</span>
 
 <!--v-->
 ### Unterscheidung Release/Test-Version II
 
-* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: Suffix $\neq$ '00', 'X0', 'X5'</span>
-* `01.12.10.50` <span class="fragment" data-fragment-index="2">- Hotfix, da Suffix = 50</span>
-* `01.12.10.55` <span class="fragment" data-fragment-index="3">- Patch, da Suffix = 55</span>
+* `01.12.10.09` <span class="fragment" data-fragment-index="1">- Testversion: letzte Ziffer $\neq$ '0'</span>
+* `01.12.10.10`
+  * <!-- .element: class="fragment" data-fragment-index="2" --> Hotfix, da Suffix = 10 (letzte Ziffer eine '0')
+  * <!-- .element: class="fragment" data-fragment-index="3" --> Oder ist es doch die 10. Testversionen für `x.11.00`?
+  * <!-- .element: class="fragment" data-fragment-index="4" -->  Kollisionen von Testversionen/Hotfixes durch Doppelbelegung der letzten Ziffern
+
 
 <!--v-->
 ### Zeitpunkt einer Auslieferung

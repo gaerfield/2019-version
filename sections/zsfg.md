@@ -1,3 +1,4 @@
+<!--s-->
 # Wozu das Ganze I
 
 * Technisch haben wir nicht viel gewonnen
@@ -8,6 +9,7 @@
   * vierte Teil `dd` wird ein Suffix
   * mehr oder weniger ließen sich 90% der Nummern abbilden, also wozu das Ganze?
 
+<!--v-->
 # Wozu das Ganze II
 
 * Endnutzer: Gemeinsamkeit der Versionsnummer und des CC-Release geben eindeutige Aussage
