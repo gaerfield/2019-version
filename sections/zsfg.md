@@ -1,19 +1,30 @@
 <!--s-->
-# Wozu das Ganze I
-
-* Technisch haben wir nicht viel gewonnen
-  * aa.bb.cc.dd
-  * erste Teil der Versionsnummer `aa` wird gestrichen
-  * zweite Teil `bb` wird ersetzt durch `CC-Release`
-  * dritte Teil `cc` bleibt wie es ist
-  * vierte Teil `dd` wird ein Suffix
-  * mehr oder weniger ließen sich 90% der Nummern abbilden, also wozu das Ganze?
+## Vorteile
 
 <!--v-->
-# Wozu das Ganze II
+### Anwender
+* Gemeinsamkeit in MinD-Versionsnummer und CC-Release erkennbar
 
-* Endnutzer: Gemeinsamkeit der Versionsnummer und des CC-Release geben eindeutige Aussage
-* Release-Manager: keine Notwendigkeit der manuellen Pflege der Versionsnummer (es kommt alles aus Tags oder der Repository)
-* QA und Entwickler:
-  * deutlich verbesserte Lesbarkeit der Versionsnummer für auftretende Bugs
-  * vereinfachte Kommunikation, da an Version auch Ursprung des Bugs erkennbar
+<!--v-->
+### Release-Manager
+* keine Notwendigkeit der manuellen Pflege der Versionsnummer (Steuerung vollständig über Tag oder Commit)
+* Unterscheidung zwischen Testversionen für Feature, Integrationszweig oder Auslieferung
+* Unterscheidung zwischen Test- und Produktionsversion (Produktion enthält kein Suffix)
+
+<!--v-->
+### QA und Entwickler
+
+* Test- & Zielversion durch `rc`-Suffix konsistent zueinander
+* einfache Zuordnung einer Issue-Versionsnummer zu betroffenen Zweigen/Versionen (keine Uminterpretation `01.13` zu `19.1` )
+* ob Bug produktiv auftreten kann ist ersichtlich
+  * Affects Ver.: `19.1.0-rc5`, Fix Ver.: `19.1.0`
+  * Bug wurde in Testversion entdeckt aber vor Auslieferung behoben
+* beliebiger Suffix bietet Flexibilität für zukünftige Erweiterungen
+
+<!--v-->
+## Motivation: bisher
+![](img/vorher.png)
+
+<!--v-->
+## Motivation: zukünftig
+![](img/nachher.png)

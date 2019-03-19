@@ -12,7 +12,7 @@ revealOptions:
   backgroundTransition: 'fade'
 ---
 
-# Vorschlag einer geänderten Versionsnummernvergabe
+# Vorschlag Versionskonzept
 
 <!--s-->
 ## Inhalt
