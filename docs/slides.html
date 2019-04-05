@@ -56,7 +56,7 @@
 </script></section><section data-markdown><script type="text/template">
 ### Auslieferungszeitpunkt
 * für Software mit festen Auslieferungsterminen wird eine Kombination aus Jahr und Monat genutzt:
-  * Ubuntu `18.10`: das zweite Release für des Jahres 2018, veröffentlicht im Oktober
+  * Ubuntu `18.10`: das Oktober-Release des Jahres 2018
   * CC-Release `18.2`: das 2. Release des Jahres 2018
 
 </script></section><section data-markdown><script type="text/template">
@@ -173,7 +173,6 @@
   * Update: laufende Nummer zu einem Release
   * Hotfix: sollten wie Update behandelt werden
   * Sonderfall Patches: werden in Echtsystemen nicht angezeigt
-    * ließe sich "versteckt" (unsichtbar für Endanwender) hinterlegen
 
 </script></section><section data-markdown><script type="text/template">
 ### Regeln III - Auslieferungen zwecks QA
@@ -181,8 +180,7 @@
   * **p** - patch: werden in Echtsystemen nicht angezeigt
   * **rc** - release-candidate: Testversion an BMS oder Rechenzentrum
   * **F[ABCD]-[X]**: die Xte Testversion des Features ABCD an BMS
-    * alternativ **F[ABCD]-[Featurename]-[X]**
-  * **i[X]**: die Xte Testversion eines Integrationszweigs
+  * **i[X]**: die Xte Testversion eines Integrationszweigs (bspw. `18.2-i17`)
 
 </script></section><section data-markdown><script type="text/template">
 ### Regeln IV - Builds ohne explizite Version
@@ -233,7 +231,7 @@
 * `01.13.00.02` und `01.13.00.08`
   * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
   * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `19.1-F2326-1` und `19.1.0-rc8`
-  * <!-- .element: class="fragment" data-fragment-index="2" --> potentiell viele Änderungen (möglicherweise auch gar keine, weil bereits in 19.1.0 enthalten)
+  * <!-- .element: class="fragment" data-fragment-index="2" --> potentiell viele Änderungen oder auch gar keine, weil bereits in 19.1.0 enthalten
   * <!-- .element: class="fragment" data-fragment-index="3" --> definitiv keine DB-Schema-Änderungen (neue Tabellen, etc.)
 
 </script></section><section data-markdown><script type="text/template">
@@ -259,7 +257,7 @@
 ### Unterscheidung Release/Test-Version II
 
 * `01.12.10.09` - Testversion `18.2.11-rc9`
-* `01.12.10.10` - Hotfix: `18.2.10-hf1`<!-- .element: class="fragment" data-fragment-index="1" -->
+* `01.12.10.10` - Hotfix: `18.2.11`<!-- .element: class="fragment" data-fragment-index="1" -->
 * `???` - Patch: `18.2.10-p1`<!-- .element: class="fragment" data-fragment-index="1" -->
 * für Endanwender könnten wir Anzeige des Suffix streichen, so dass dort nur 18.2.10 angezeigt wird (sinnvoll?)
 
