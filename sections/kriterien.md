@@ -27,7 +27,7 @@
 <!--v-->
 ### Auslieferungszeitpunkt
 * für Software mit festen Auslieferungsterminen wird eine Kombination aus Jahr und Monat genutzt:
-  * Ubuntu `18.10`: das zweite Release für des Jahres 2018, veröffentlicht im Oktober
+  * Ubuntu `18.10`: das Oktober-Release des Jahres 2018
   * CC-Release `18.2`: das 2. Release des Jahres 2018
 
 <!--v-->

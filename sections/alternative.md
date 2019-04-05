@@ -17,7 +17,6 @@
   * Update: laufende Nummer zu einem Release
   * Hotfix: sollten wie Update behandelt werden
   * Sonderfall Patches: werden in Echtsystemen nicht angezeigt
-    * ließe sich "versteckt" (unsichtbar für Endanwender) hinterlegen
 
 <!--v-->
 ### Regeln III - Auslieferungen zwecks QA
@@ -25,8 +24,7 @@
   * **p** - patch: werden in Echtsystemen nicht angezeigt
   * **rc** - release-candidate: Testversion an BMS oder Rechenzentrum
   * **F[ABCD]-[X]**: die Xte Testversion des Features ABCD an BMS
-    * alternativ **F[ABCD]-[Featurename]-[X]**
-  * **i[X]**: die Xte Testversion eines Integrationszweigs
+  * **i[X]**: die Xte Testversion eines Integrationszweigs (bspw. `18.2-i17`)
 
 <!--v-->
 ### Regeln IV - Builds ohne explizite Version

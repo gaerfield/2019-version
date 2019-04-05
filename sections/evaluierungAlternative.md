@@ -37,7 +37,7 @@
 * `01.13.00.02` und `01.13.00.08`
   * Erwartung: wenige Änderungen, da geringste Versionsnummer erhöht
   * <!-- .element: class="fragment" data-fragment-index="1" --> neu: `19.1-F2326-1` und `19.1.0-rc8`
-  * <!-- .element: class="fragment" data-fragment-index="2" --> potentiell viele Änderungen (möglicherweise auch gar keine, weil bereits in 19.1.0 enthalten)
+  * <!-- .element: class="fragment" data-fragment-index="2" --> potentiell viele Änderungen oder auch gar keine, weil bereits in 19.1.0 enthalten
   * <!-- .element: class="fragment" data-fragment-index="3" --> definitiv keine DB-Schema-Änderungen (neue Tabellen, etc.)
 
 <!--v-->
@@ -63,7 +63,7 @@
 ### Unterscheidung Release/Test-Version II
 
 * `01.12.10.09` - Testversion `18.2.11-rc9`
-* `01.12.10.10` - Hotfix: `18.2.10-hf1`<!-- .element: class="fragment" data-fragment-index="1" -->
+* `01.12.10.10` - Hotfix: `18.2.11`<!-- .element: class="fragment" data-fragment-index="1" -->
 * `???` - Patch: `18.2.10-p1`<!-- .element: class="fragment" data-fragment-index="1" -->
 * für Endanwender könnten wir Anzeige des Suffix streichen, so dass dort nur 18.2.10 angezeigt wird (sinnvoll?)
 
